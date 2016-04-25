@@ -1,0 +1,61 @@
+{
+  "name": "students",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "string"
+    },
+    "authId": {
+      "type": "string"
+    },
+    "authToken": {
+      "type": "string"
+    },
+    "coins": {
+      "type": "number",
+      "required": true,
+      "default": "0"
+    },
+    "genre": {
+      "type": [
+        "string"
+      ]
+    },
+    "phone": {
+      "type": "string"
+    },
+    "notiTarget": {
+      "type": [
+        "string"
+      ]
+    },
+    "toolType": {
+      "type": "string"
+    },
+    "toolId": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "purchases": {
+      "type": "hasMany",
+      "model": "purchase",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

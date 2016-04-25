@@ -1,0 +1,33 @@
+{
+  "name": "lessons",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "coins": {
+      "type": "number",
+      "required": true,
+      "default": "0"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "curriculum": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "enrollments": {
+      "type": "hasMany",
+      "model": "enrollments",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
