@@ -5,7 +5,7 @@ module.exports = function(Enrollments) {
   Enrollments.disableRemoteMethod("updateAttributes", false);
   Enrollments.disableRemoteMethod('createChangeStream', true);
 
-  Enrollments.disableRemoteMethod("find", false);
+  Enrollments.disableRemoteMethod("find", false);         //GET /enrollments
   Enrollments.disableRemoteMethod("findById", true);
   Enrollments.disableRemoteMethod("findOne", true);
 
@@ -24,6 +24,7 @@ module.exports = function(Enrollments) {
   Enrollments.disableRemoteMethod('__get__accessTokens', false);
   Enrollments.disableRemoteMethod('__updateById__accessTokens', false);
 
+  //GET /enrollments/start
   Enrollments.start = function(msg, cb) {
     console.log("start lesson");
     cb(null, 'Greetings... ' + msg);
