@@ -33,23 +33,23 @@
     "public": false
   },
   "students": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "teachers": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "purchase": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "lessons": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "enrollments": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   }
 }
