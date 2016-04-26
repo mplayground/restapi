@@ -6,7 +6,11 @@
     "validateUpsert": true
   },
   "properties": {
-    "dateAt": {
+    "startAt": {
+      "type": "date",
+      "required": true
+    },
+    "endAt": {
       "type": "date",
       "required": true
     },

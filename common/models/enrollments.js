@@ -68,4 +68,29 @@ module.exports = function(Enrollments) {
         returns: {arg: 'result', type: 'string'}
       }
   );
+
+  // 모델에 저장되기전 호출
+  Enrollments.observe('before save', function updateTimestamp(ctx, next) {
+    if (ctx.instance) {
+      // 강사, 학생별로 수강시간이 겹치지 않도록 체크 (개발중)
+      if(false) {
+        //var result_str =  Enrollments.find({  })
+
+        console.log(ctx.instance.startAt);
+        console.log(ctx.instance.endAt);
+
+        //Stop the deletion of this Client
+        var err = new Error("exists Enrollments");
+        err.statusCode = 400;
+        console.log(err.toString());
+        next(err);
+      } else {
+        next();
+      }
+    } else {
+      //ctx.data.updated = new Date();
+      console.log("인스턴스가 없으므로 에러");
+    }
+  });
+
 };
