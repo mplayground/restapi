@@ -27,6 +27,11 @@
       "model": "students",
       "foreignKey": "",
       "through": "enrollments"
+    },
+    "teachers": {
+      "type": "belongsTo",
+      "model": "teachers",
+      "foreignKey": ""
     }
   },
   "acls": [],

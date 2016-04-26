@@ -13,7 +13,7 @@
     "status": {
       "type": "string",
       "required": true,
-      "default": "close"
+      "default": "open"
     },
     "coins": {
       "type": "number",
