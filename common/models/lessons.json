@@ -22,15 +22,14 @@
   },
   "validations": [],
   "relations": {
-    "students": {
-      "type": "hasMany",
-      "model": "students",
-      "foreignKey": "",
-      "through": "enrollments"
-    },
     "teachers": {
       "type": "belongsTo",
       "model": "teachers",
+      "foreignKey": ""
+    },
+    "enrollments": {
+      "type": "hasMany",
+      "model": "enrollments",
       "foreignKey": ""
     }
   },
