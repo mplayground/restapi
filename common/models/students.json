@@ -54,6 +54,12 @@
       "type": "hasMany",
       "model": "purchase",
       "foreignKey": ""
+    },
+    "lessons": {
+      "type": "hasMany",
+      "model": "lessons",
+      "foreignKey": "",
+      "through": "enrollments"
     }
   },
   "acls": [],

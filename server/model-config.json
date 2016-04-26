@@ -50,6 +50,8 @@
   },
   "enrollments": {
     "dataSource": "MongoDB",
-    "public": true
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   }
 }

@@ -22,10 +22,11 @@
   },
   "validations": [],
   "relations": {
-    "enrollments": {
+    "students": {
       "type": "hasMany",
-      "model": "enrollments",
-      "foreignKey": ""
+      "model": "students",
+      "foreignKey": "",
+      "through": "enrollments"
     }
   },
   "acls": [],

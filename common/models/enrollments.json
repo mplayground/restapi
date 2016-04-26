@@ -7,11 +7,7 @@
   },
   "properties": {
     "dateAt": {
-      "type": "string",
-      "required": true
-    },
-    "timeAt": {
-      "type": "string",
+      "type": "date",
       "required": true
     },
     "status": {
@@ -26,7 +22,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "lessons": {
+      "type": "belongsTo",
+      "model": "lessons",
+      "foreignKey": ""
+    },
+    "students": {
+      "type": "belongsTo",
+      "model": "students",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }
