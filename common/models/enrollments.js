@@ -29,10 +29,12 @@ module.exports = function(Enrollments) {
     var startLesson = function(enrollment, cb){
       enrollment.students(function(err, student){
         if(err) throw err;
+        //학생이 지정되지 않을 수 있고, 학생의 이메일이 설정되어 있지 않을 수 있다.
         if(student && student.email){
           enrollment.lessons(function(err, lesson){
             lesson.teachers(function(err, teacher){
               if(err) throw err;
+              // 강사가 삭제되어 노출되지 않거나, 강사의 이메일이 설정되어 있지 않을 수 있다.
               if(teacher && teacher.email){
                 console.log('launch Handout teacher:' + teacher.email + ', student:' + student.email);
                 enrollment.status = 'start'
