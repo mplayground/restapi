@@ -4,18 +4,14 @@ module.exports = function(Enrollments) {
   Enrollments.disableRemoteMethod("updateAll", true);
   Enrollments.disableRemoteMethod("updateAttributes", false);
   Enrollments.disableRemoteMethod('createChangeStream', true);
-
   Enrollments.disableRemoteMethod("find", false);         //GET /enrollments
   Enrollments.disableRemoteMethod("findById", false);
   Enrollments.disableRemoteMethod("findOne", true);
-
   Enrollments.disableRemoteMethod("deleteById", true);
-
   Enrollments.disableRemoteMethod("confirm", true);
   Enrollments.disableRemoteMethod("count", true);
   Enrollments.disableRemoteMethod("exists", true);
   Enrollments.disableRemoteMethod("resetPassword", true);
-
   Enrollments.disableRemoteMethod('__count__accessTokens', false);
   Enrollments.disableRemoteMethod('__create__accessTokens', false);
   Enrollments.disableRemoteMethod('__delete__accessTokens', false);
