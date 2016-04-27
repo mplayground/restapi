@@ -1,0 +1,25 @@
+{
+  "username":"admin",
+  "password":"Admin1234!"
+}
+//gfXs7asNyZjgjtM1f7JdmfjYeKGkSl1rAPCOap850WbeYXm1eVGlda2xcC0WTdhK
+{
+  "username":"bruce",
+  "password":"bruce1234!"
+}
+57209ac35c8ff5da46ce81e5
+//Nec4ycgCoPTjnOPYBXY9pzAh7zHj2ByOyHY4akOyIdgn0G0MflPIXbrShUM3fE8Y
+
+{
+  "username":"test",
+  "password":"test",
+  "email":"test@test.com"
+}
+
+{
+  "paymentType": "credit",
+  "coins": 100,
+  "amount": "100000",
+  "id": "p3",
+  "studentsId": "57209ac35c8ff5da46ce81e5"
+}

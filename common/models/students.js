@@ -7,8 +7,8 @@ module.exports = function(Students) {
   Students.disableRemoteMethod('createChangeStream', true);
 
   Students.disableRemoteMethod("find", false);         //GET /Students
-  Students.disableRemoteMethod("findById", true);
-  Students.disableRemoteMethod("findOne", true);
+  Students.disableRemoteMethod("findById", false);
+  Students.disableRemoteMethod("findOne", false);
 
   Students.disableRemoteMethod("deleteById", true);
 
@@ -24,5 +24,10 @@ module.exports = function(Students) {
   Students.disableRemoteMethod('__findById__accessTokens', false);
   Students.disableRemoteMethod('__get__accessTokens', false);
   Students.disableRemoteMethod('__updateById__accessTokens', false);
+
+  // Purchases
+  Students.disableRemoteMethod("__count__purchases", false);
+  // Students.disableRemoteMethod("__upsert__purchases", false);       // POST /Students
+  // Students.disableRemoteMethod("__create__purchases", false);       // POST /Students
 
 };

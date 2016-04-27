@@ -1,5 +1,5 @@
 {
-  "name": "enrollments",
+  "name": "Enrollments",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -29,15 +29,28 @@
   "relations": {
     "lessons": {
       "type": "belongsTo",
-      "model": "lessons",
+      "model": "Lessons",
       "foreignKey": ""
     },
     "students": {
       "type": "belongsTo",
-      "model": "students",
+      "model": "Students",
       "foreignKey": ""
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }

@@ -14,7 +14,8 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "db",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -32,26 +33,26 @@
     "dataSource": "db",
     "public": false
   },
-  "students": {
+  "Teachers": {
     "dataSource": "MongoDB",
     "public": true
   },
-  "teachers": {
+  "Purchase": {
     "dataSource": "MongoDB",
     "public": true
   },
-  "purchase": {
+  "Lessons": {
     "dataSource": "MongoDB",
     "public": true
   },
-  "lessons": {
-    "dataSource": "MongoDB",
-    "public": true
-  },
-  "enrollments": {
+  "Enrollments": {
     "dataSource": "MongoDB",
     "public": true,
     "$promise": {},
     "$resolved": true
+  },
+  "Students": {
+    "dataSource": "MongoDB",
+    "public": true
   }
 }

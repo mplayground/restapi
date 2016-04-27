@@ -1,5 +1,5 @@
 {
-  "name": "purchase",
+  "name": "Purchase",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -21,7 +21,26 @@
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "students": {
+      "type": "belongsTo",
+      "model": "Students",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }
