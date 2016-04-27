@@ -28,7 +28,6 @@ module.exports = function(Purchase) {
       ctx.instance.students(function(err, student){
         if(err) throw err;
         if(student){
-          var Students = app.models.Students
           var sumCoins = parseInt(student.coins) + parseInt(purchase.coins)
           student.updateAttributes({coins:sumCoins},
             function(err,instance){

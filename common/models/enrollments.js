@@ -73,23 +73,34 @@ module.exports = function(Enrollments) {
   Enrollments.observe('before save', function updateTimestamp(ctx, next) {
     if (ctx.instance) {
       // 강사, 학생별로 수강시간이 겹치지 않도록 체크 (개발중)
-      if(false) {
-        //var result_str =  Enrollments.find({  })
+      Enrollments.find(function(err, enrollment) {
+        if(err) throw err;
+        if(enrollment.length > 0){
+          console.log(ctx.instance.startAt);
+          console.log(ctx.instance.endAt);
 
-        console.log(ctx.instance.startAt);
-        console.log(ctx.instance.endAt);
-
-        //Stop the deletion of this Client
-        var err = new Error("exists Enrollments");
-        err.statusCode = 400;
-        console.log(err.toString());
-        next(err);
-      } else {
-        next();
-      }
+          enrollment.forEach(function(enrollment) {
+            // 기존강의 시작시간보다 종료기간이 같거나 작고 기존강의 종료시간보다 시작시간이 같거나 커야 만족
+            if(!(ctx.instance.endAt <= enrollment.startAt && enrollment.endAt <= ctx.instance.startAt)) {
+              var err = new Error("겹치는 시간이 있다.");
+              err.statusCode = 400;
+              console.log(err.toString());
+              next(err);
+            } else {
+              // 겹치는게 없으므로 진행
+              next();
+            }
+          });
+        } else {
+          // 객체가 하나도 없으니 생성
+          next();
+        }
+      });
     } else {
-      //ctx.data.updated = new Date();
-      console.log("인스턴스가 없으므로 에러");
+      var err = new Error("not exists instance");
+      err.statusCode = 400;
+      console.log(err.toString());
+      next(err);
     }
   });
 
