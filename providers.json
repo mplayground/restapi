@@ -8,8 +8,22 @@
     "authPath": "/auth/facebook",
     "callbackPath": "/auth/facebook/callback",
     "successRedirect": "/auth/account",
-    "failureRedirect": "/login",
+    "failureRedirect": "/login_fail.html",
     "scope": ["email"],
+    "failureFlash": true
+  },
+  "google-login": {
+    "provider": "google",
+    "module": "passport-google-oauth",
+    "strategy": "OAuth2Strategy",
+    "clientID": "93688903970-ncf2ngpcdo05uj7t9t0a41gq11c0dm1t.apps.googleusercontent.com",
+    "clientSecret": "2yd1jcxc5ehasfx2x0l9aFwH",
+    "callbackURL": "/auth/google/callback",
+    "authPath": "/auth/google",
+    "callbackPath": "/auth/google/callback",
+    "successRedirect": "/auth/account",
+    "failureRedirect": "/login_fail.html",
+    "scope": ["email", "profile"],
     "failureFlash": true
   }
 }
