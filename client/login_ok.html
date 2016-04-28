@@ -1,0 +1,21 @@
+<head>
+<title>LoopBack</title>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      var access_token = $.cookie('access_token');
+      var userId = $.cookie('userId');
+
+      $("#access_token").html(access_token);
+      $("#userId").html(userId);
+    });
+  </script>
+</head>
+<body>
+    로그인성공
+    <li>access_token : <span id="access_token"></span></li>
+    <li>userId : <span id="userId"></span></li>
+
+</body>

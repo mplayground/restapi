@@ -4,7 +4,8 @@
       "loopback/common/models",
       "loopback/server/models",
       "../common/models",
-      "./models"
+      "./models",
+      "./node_modules/loopback-component-passport/lib/models"
     ],
     "mixins": [
       "loopback/common/mixins",
@@ -54,5 +55,17 @@
   "Students": {
     "dataSource": "MongoDB",
     "public": true
+  },
+  "accessToken": {
+    "dataSource": "MongoDB",
+    "public": false
+  },
+  "userCredential": {
+    "dataSource": "MongoDB",
+    "public": false
+  },
+  "userIdentity": {
+    "dataSource": "MongoDB",
+    "public": false
   }
 }

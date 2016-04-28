@@ -14,6 +14,7 @@
           dataType : 'json',
           success: function(data) {
               alert("data.userId : " + data.userId);
+              location.href = "/login_ok.html";
           },
           error: function(request, status, error) {
             alert("request.status : " + request.status);
