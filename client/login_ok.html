@@ -10,12 +10,50 @@
 
       $("#access_token").html(access_token);
       $("#userId").html(userId);
+
+      $.ajax({
+          url: "/api/Students/"+userId+"?access_token="+access_token,
+          method: "get",
+          data: {},
+          dataType : 'json',
+          success: function(data) {
+              $("#userName").html(data.username);
+          },
+          error: function(request, status, error) {
+            alert("request.status : " + request.status);
+          }
+      });
     });
+
+    function logout() {
+
+      var username = $("#username").val();
+      var password = $("#password").val();
+
+      $.ajax({
+          url: "/api/Students/logout?access_token="+$.cookie('access_token'),
+          method: "post",
+          data: {},
+          dataType : 'json',
+          success: function(data) {
+              location.href = "/index.html";
+          },
+          error: function(request, status, error) {
+            alert("request.status : " + request.status);
+          }
+      });
+    }
   </script>
 </head>
 <body>
     로그인성공
     <li>access_token : <span id="access_token"></span></li>
     <li>userId : <span id="userId"></span></li>
+    <li>userName : <span id="userName"></span></li>
 
+    <br>
+
+    <span id="login_data"></span>
+
+    <a href="javascript:logout();">로그아웃</a>
 </body>
