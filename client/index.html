@@ -1,5 +1,39 @@
-<head><title>LoopBack</title></head>
+<head>
+<title>LoopBack</title>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script>
+    function login() {
+
+      var username = $("#username").val();
+      var password = $("#password").val();
+
+      $.ajax({
+          url: "/api/Students/login",
+          method: "post",
+          data: {username: username, password: password},
+          dataType : 'json',
+          success: function(data) {
+              alert("data.userId : " + data.userId);
+          },
+          error: function(request, status, error) {
+            alert("request.status : " + request.status);
+          }
+      });
+    }
+  </script>
+</head>
 <body>
     <h1>LoopBack Rocks!</h1>
     <p>Hello World... </p>
+
+    <a href="/auth/facebook">페이스북 로그인</a>
+
+    <br><br><br>
+    ***** 계정 로그인 테스트 *****
+    <br>
+    id : <input type="text" id="username" name="username">
+    <br>
+    pass : <input type="password" id="password" name="password">
+
+    <a href="javascript:login();">로그인</a>
 </body>

@@ -10,7 +10,8 @@ module.exports = function(app) {
     var Students = app.models.Students;
     Students.create([
       {username: 'admin', email: 'admin@mplayground.com', password: 'Admin1234!'},  // admin user
-      {username: 'bruce', email: 'bruce@mplayground.com', password: 'bruce1234!'}   // default user
+      {username: 'bruce', email: 'bruce@mplayground.com', password: 'bruce1234!'},   // default user
+      {username: 'sononpos', email: 'sononpos@mplayground.com', password: 'sononpos1234!'}   // default user
     ], function(err, students){
         if(err) return cb(err);
         Role.create({
