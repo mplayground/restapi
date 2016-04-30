@@ -40,8 +40,12 @@ module.exports = function(app) {
   // 초기 Admin 계정을 추가한다.
   MongoDB.automigrate('Admin', function(err){
     if(err) throw (err);
-
     initAdmin()
+  });
+
+  // 초기 Admin 계정을 추가한다.
+  MongoDB.automigrate('Students', function(err){
+    if(err) throw (err);
     initTestStudents()
   });
 }
