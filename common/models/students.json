@@ -109,6 +109,12 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "__get__purchases"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}
