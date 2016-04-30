@@ -15,23 +15,23 @@
     ]
   },
   "User": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "Teachers": {
@@ -67,5 +67,9 @@
   "userIdentity": {
     "dataSource": "MongoDB",
     "public": false
+  },
+  "Admin": {
+    "dataSource": "MongoDB",
+    "public": true
   }
 }
