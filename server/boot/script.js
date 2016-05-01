@@ -3,6 +3,13 @@ module.exports = function(app) {
   var Role = app.models.Role;
   var RoleMapping = app.models.RoleMapping;
 
+  // app.models.Admin.destroyAll(function(err, info){});
+  // app.models.RoleMapping.destroyAll(function(err, info){});
+  // app.models.Role.destroyAll(function(err, info){});
+  // app.models.Students.destroyAll(function(err, info){});
+  // app.models.StudentAccessToken.destroyAll(function(err, info){});
+  // app.models.AccessToken.destroyAll(function(err, info){});
+
   var initAdmin = function(){
     var Admin = app.models.Admin;
     Admin.create([

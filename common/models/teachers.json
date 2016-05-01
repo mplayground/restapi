@@ -34,7 +34,7 @@
       "permission": "DENY"
     },
     {
-      "accessType": "READ",
+      "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
@@ -53,12 +53,6 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "create"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW"
     }
   ],
   "methods": {}

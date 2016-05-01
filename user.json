@@ -15,11 +15,32 @@
   "password":"test",
   "email":"test@test.com"
 }
-
+4gNYZUJTC9kOA8jIoxCfU4cxd2iNeRRU50MlXgOl74TMIevmFNJYFxkODSb5UE7n
 {
   "paymentType": "credit",
   "coins": 100,
   "amount": "100000",
   "id": "p3",
   "studentsId": "57209ac35c8ff5da46ce81e5"
+}
+
+
+// Teachers
+{
+  "username":"G-Hong",
+  "password":"test",
+  "email":"test@test.com"
+}
+
+{
+  "username":"G-Hong",
+  "password":"test"
+}
+//3pMnZvoOahMtEYQWAGNsVFZbzxHH7aijxuPoyIgPTQxEzepfrpq1GXIMJs5xJ5A3
+57248d477086800808119c94
+{
+  "status": "request",
+  "username": "G-Hong",
+  "email": "test@test.com",
+  "id": "572458811f462d5204a89551"
 }

@@ -34,10 +34,6 @@
     "dataSource": "MongoDB",
     "public": false
   },
-  "Teachers": {
-    "dataSource": "MongoDB",
-    "public": true
-  },
   "Purchase": {
     "dataSource": "MongoDB",
     "public": true
@@ -56,10 +52,6 @@
     "dataSource": "MongoDB",
     "public": true
   },
-  "accessToken": {
-    "dataSource": "MongoDB",
-    "public": false
-  },
   "userCredential": {
     "dataSource": "MongoDB",
     "public": false
@@ -71,5 +63,17 @@
   "Admin": {
     "dataSource": "MongoDB",
     "public": true
+  },
+  "Teachers": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "StudentAccessToken": {
+    "dataSource": "MongoDB",
+    "public": false
+  },
+  "TeacherAccessToken": {
+    "dataSource": "MongoDB",
+    "public": false
   }
 }

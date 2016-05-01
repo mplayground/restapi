@@ -23,5 +23,4 @@ module.exports = function(Teachers) {
   Teachers.disableRemoteMethod('__findById__accessTokens', false);
   Teachers.disableRemoteMethod('__get__accessTokens', false);
   Teachers.disableRemoteMethod('__updateById__accessTokens', false);
-
 };

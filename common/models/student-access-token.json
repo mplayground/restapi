@@ -1,11 +1,14 @@
 {
-  "name": "userCredential",
-  "plural": "userCredentials",
-  "base": "UserCredential",
+  "name": "StudentAccessToken",
+  "base": "AccessToken",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
   "properties": {},
   "validations": [],
   "relations": {
-    "user": {
+    "students": {
       "type": "belongsTo",
       "model": "Students",
       "foreignKey": "userId"
