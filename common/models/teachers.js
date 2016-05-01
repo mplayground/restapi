@@ -23,4 +23,35 @@ module.exports = function(Teachers) {
   Teachers.disableRemoteMethod('__findById__accessTokens', false);
   Teachers.disableRemoteMethod('__get__accessTokens', false);
   Teachers.disableRemoteMethod('__updateById__accessTokens', false);
+
+  // 모델에 저장되기전 호출
+  Teachers.observe('before save', function updateTimestamp(ctx, next) {
+
+    var app = require('../../server/server');
+    var Role = app.models.Role;
+    var RoleMapping = app.models.RoleMapping;
+
+    if (ctx.instance) {
+
+      Role.findOne({
+        name:'teacher'
+      }, function(err,role){
+        role.principals.create({
+          principalType: RoleMapping.USER,
+          principalId: ctx.instance.id
+        }, function(err, principal) {
+          if (err) throw err;
+          console.log('Created principal:', principal);
+          next();
+        });
+      });
+
+    } else {
+      var err = new Error("not exists instance");
+      err.statusCode = 400;
+      console.log(err.toString());
+      next(err);
+    }
+  });
+
 };

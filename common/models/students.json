@@ -64,6 +64,13 @@
       "property": "findById"
     },
     {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "student",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$everyone",

@@ -30,4 +30,35 @@ module.exports = function(Students) {
   // Students.disableRemoteMethod("__upsert__purchases", false);       // POST /Students
   // Students.disableRemoteMethod("__create__purchases", false);       // POST /Students
 
+
+  // 모델에 저장되기전 호출
+  Students.observe('before save', function updateTimestamp(ctx, next) {
+
+    var app = require('../../server/server');
+    var Role = app.models.Role;
+    var RoleMapping = app.models.RoleMapping;
+
+    if (ctx.instance) {
+
+      Role.findOne({
+        name:'student'
+      }, function(err,role){
+        role.principals.create({
+          principalType: RoleMapping.USER,
+          principalId: ctx.instance.id
+        }, function(err, principal) {
+          if (err) throw err;
+          console.log('Created principal:', principal);
+          next();
+        });
+      });
+
+    } else {
+      var err = new Error("not exists instance");
+      err.statusCode = 400;
+      console.log(err.toString());
+      next(err);
+    }
+  });
+
 };

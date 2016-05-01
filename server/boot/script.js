@@ -3,12 +3,17 @@ module.exports = function(app) {
   var Role = app.models.Role;
   var RoleMapping = app.models.RoleMapping;
 
-  // app.models.Admin.destroyAll(function(err, info){});
-  // app.models.RoleMapping.destroyAll(function(err, info){});
-  // app.models.Role.destroyAll(function(err, info){});
-  // app.models.Students.destroyAll(function(err, info){});
-  // app.models.StudentAccessToken.destroyAll(function(err, info){});
-  // app.models.AccessToken.destroyAll(function(err, info){});
+  app.models.Admin.destroyAll(function(err, info){});
+  app.models.RoleMapping.destroyAll(function(err, info){});
+  app.models.Role.destroyAll(function(err, info){});
+  app.models.Students.destroyAll(function(err, info){});
+  app.models.StudentAccessToken.destroyAll(function(err, info){});
+  app.models.AccessToken.destroyAll(function(err, info){});
+  app.models.Teachers.destroyAll(function(err, info){});
+  app.models.Lessons.destroyAll(function(err, info){});
+
+  Role.create({name:'student'},function(err, role){});
+  Role.create({name:'teacher'},function(err, role){});
 
   var initAdmin = function(){
     var Admin = app.models.Admin;
@@ -54,5 +59,40 @@ module.exports = function(app) {
   MongoDB.automigrate('Students', function(err){
     if(err) throw (err);
     initTestStudents()
+  });
+
+  Role.registerResolver('teacher', function(role, context, cb) {
+
+    function reject(err) {
+      if(err) {
+        return cb(err);
+      }
+      cb(null, false);
+    }
+
+    console.log('registerResolver >> ' + context.modelName);
+
+    if (context.modelName !== 'lessons') {
+      // the target model is not project
+      return reject();
+    }
+
+    var userId = context.accessToken.userId;
+
+    console.log('registerResolver.userId >> ' + userId);
+
+    if (!userId) {
+      return reject(); // do not allow anonymous users
+    }
+
+    // check if userId is in team table for the given project id
+    context.model.findOne({ id:context.modelId, teachersId:userId }, function(err, lesson) {
+      if(err || !lesson){
+        reject(err);
+      }
+
+      console.log("Y can access Lesson");
+
+    });
   });
 }

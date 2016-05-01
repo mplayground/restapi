@@ -27,14 +27,15 @@
 
 // Teachers
 {
-  "username":"G-Hong",
+  "username":"G-Shin",
   "password":"test",
-  "email":"test@test.com"
+  "email":"gshin@test.com"
 }
 
 {
   "username":"G-Hong",
-  "password":"test"
+  "password":"test",
+  "email":"ghong@test.com"
 }
 //3pMnZvoOahMtEYQWAGNsVFZbzxHH7aijxuPoyIgPTQxEzepfrpq1GXIMJs5xJ5A3
 57248d477086800808119c94
