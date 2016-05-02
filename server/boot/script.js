@@ -40,12 +40,21 @@ module.exports = function(app) {
   var initTestStudents = function(){
     var Students = app.models.Students;
     Students.create([
-      {username: 'bruce', email: 'bruce@mplayground.com', password: 'bruce1234!', id:'1000'},   // default user
-      {username: 'sononpos', email: 'sononpos@mplayground.com', password: 'sononpos1234!', id:'1001'}   // default user
+      {username: 'bruce', email: 'bruce@mplayground.com', password: 'bruce1234!', id:'id1000'},   // default user
+      {username: 'sononpos', email: 'sononpos@mplayground.com', password: 'sononpos1234!', id:'id1001'}   // default user
     ], function(err, students){
         if(err) return cb(err);
         console.log('inserted default users for test');
         console.log('students : ' + students);
+    });
+
+    var Teachers = app.models.Teachers;
+    Teachers.create([
+      {username: 'tea', email: 'tea@mplayground.com', password: 'tea1234!', id:'id1004'}
+    ], function(err, teachers){
+        if(err) return cb(err);
+        console.log('inserted default users for test');
+        console.log('teachers : ' + teachers);
     });
   }
 

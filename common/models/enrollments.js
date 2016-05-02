@@ -81,7 +81,7 @@ module.exports = function(Enrollments) {
 
           enrollment.forEach(function(enrollment) {
             // 기존강의 시작시간보다 종료기간이 같거나 작고 기존강의 종료시간보다 시작시간이 같거나 커야 만족
-            if(!(ctx.instance.endAt <= enrollment.startAt && enrollment.endAt <= ctx.instance.startAt)) {
+            if(!(ctx.instance.endAt <= enrollment.startAt) && !(enrollment.endAt <= ctx.instance.startAt)) {
               var err = new Error("겹치는 시간이 있다.");
               err.statusCode = 400;
               console.log(err.toString());
