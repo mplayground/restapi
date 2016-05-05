@@ -108,7 +108,7 @@
       var scopes = ['https://www.googleapis.com/auth/plus.me',
                     'https://www.googleapis.com/auth/hangout.av',
                     'https://www.googleapis.com/auth/hangout.participants' 
-		     ];
+		    , "https://www.googleapis.com/auth/userinfo.email" ];
       function checkAuth(isImmediate) {
           console.log('checking auth');
 	  
