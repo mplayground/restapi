@@ -66,6 +66,20 @@
       "property": "upsert"
     },
     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "student",
+      "permission": "ALLOW",
+      "property": "reserve"
+    },
+    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "admin",

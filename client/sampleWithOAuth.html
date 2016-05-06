@@ -42,6 +42,7 @@ li {
 <!-- Standard boilerplate to start hangouts.  Without these, you Hangout will not start. -->
 <script src="//hangoutsapi.talkgadget.google.com/talkgadget/apps/gadgets/js/rpc.js"></script>
 <script src="//hangoutsapi.talkgadget.google.com/hangouts/api/hangout.js?v=1.1"></script>
+<script src="//code.jquery.com/jquery.min.js"></script>
 
 <div id="apiStatus"><p>No API Status</p></div>
 <div><p>ParticipantsList:</p></div>
@@ -66,7 +67,6 @@ li {
 function getParameter(paramName) {
   var searchString = window.location.search.substring(1),
   i, val, params = searchString.split('&');
-
   for (i = 0; i < params.length; i++) {
     val = params[i].split('=');
     if (val[0] == paramName) {
@@ -141,33 +141,62 @@ function onClientReady() {
 
   // Now wait to see if the API is ready.
   gapi.hangout.onApiReady.add(initHangout);
+  gapi.hangout.onApiReady.add(sendEmail);
 
   document.getElementById('gd').innerHTML = encodeURIComponent(getParameter('gd'));
   document.getElementById('token').innerHTML = getParameter('token');
+
 }
 
 function initHangout(eventObj){
   if (eventObj.isApiReady) {
-
     console.log("API is ready");
-
     apiStatusDiv.innerHTML = '<p>API is ready</p>';
     window.setTimeout(function() {
                         gapi.auth.setToken(generateToken());
                         updateParticipants();
                       }, 1);
+  }
+}
+
+function sendEmail(eventObj){
+  if (eventObj.isApiReady) {
+
     var hangoutUrl = gapi.hangout.getHangoutUrl();
+
+    var gd = getParameter('gd')
+    var params = gd.split(':');
+    var access_token = params[0]
+    var teachersId = params[1]
+    var enrollmentId = params[2]
+
     console.log("hangoutURL : " + hangoutUrl);
+    console.log("access_token : " + access_token);
+    console.log("teachersId : " + teachersId);
+    console.log("enrollmentId : " + enrollmentId);
+
+    $.ajax({
+        url: "/api/Teachers/"+teachersId+"/startHangout?access_token="+access_token,
+        method: "post",
+        data: {
+          "hangoutUrl" : hangoutUrl,
+          "enrollmentsId" : enrollmentId
+        },
+        dataType : 'json',
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(request, status, error) {
+          alert("request.status : " + request.status);
+        }
+    });
   }
 }
 
 function generateToken() {
   var theToken = new Object();
   theToken.access_token = getParameter('token');
-
   console.log("token " + theToken.access_token);
-
-
   return theToken;
 }
 

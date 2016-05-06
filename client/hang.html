@@ -1,16 +1,33 @@
 <html>
 <head>
   <title>Hangout button demo: Inviting people</title>
+  <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
 <body>
-<form action="https://plus.google.com/hangouts/_" method="GET">
-  <input type="hidden" name="gid" value="203873342712"/>
-  <select name="gd">
-    <option>Hangouts</option>
-    <option>Google+ API</option>
-    <option>+1 Button</option>
-  </select>
-  <input type="submit"/>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('#submit_button').click(function(){
+      var gd = $('#access_token').val() + ':' +
+               $('#teachersId').val() + ':' +
+               $('#enrollmentId').val()
+      $('#gd').val(gd);
+      $('#frmSubmit').submit();
+    });
+  });
+  </script>
+
+  access_token:
+  <input type="text" id="access_token"><br>
+  teachersId:
+  <input type="text" id="teachersId"><br>
+  enrollmentId:
+  <input type="text" id="enrollmentId"><br>
+
+  <!-- <form action="frmSubmit" method="GET"> -->
+<form name="frmSubmit" action="https://plus.google.com/hangouts/_" method="GET">
+  <input type="hidden" name="gid" id="gid" value="203873342712"/>
+  <input type="hidden" name="gd" id="gd" value="0"/>
+  <input type="submit" id="submit_button"/>
 </form>
 </body>
 </html>

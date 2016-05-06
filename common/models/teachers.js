@@ -25,7 +25,7 @@ module.exports = function(Teachers) {
   Teachers.disableRemoteMethod('__updateById__accessTokens', false);
 
   // 모델에 저장되기전 호출
-  Teachers.observe('before save', function updateTimestamp(ctx, next) {
+  Teachers.observe('after save', function updateTimestamp(ctx, next) {
 
     var app = require('../../server/server');
     var Role = app.models.Role;
@@ -41,7 +41,7 @@ module.exports = function(Teachers) {
           principalId: ctx.instance.id
         }, function(err, principal) {
           if (err) throw err;
-          console.log('Created principal:', principal);
+          console.log('Created principal for Teachers:', principal);
           next();
         });
       });
@@ -53,5 +53,54 @@ module.exports = function(Teachers) {
       next(err);
     }
   });
+
+  Teachers.startHangout = function(id, data, cb) {
+
+    var app = require('../../server/server');
+    var Enrollments = app.models.Enrollments;
+
+    console.log('start hangout. id:' + id + ', data:' + data.hangoutUrl);
+
+    var startLesson = function(enrollment, cb){
+      enrollment.students(function(err, student){
+        if(err) throw err;
+        //학생이 지정되지 않을 수 있고, 학생의 이메일이 설정되어 있지 않을 수 있다.
+        if(student && student.email){
+          enrollment.updateAttributes({status:'start'},
+            function(err,instance){
+              if(err) throw err;
+              console.log('sendEmail to student[email:]' + student.email + '] with url :'+ data.hangoutUrl);
+              cb(null,'OK')
+            });
+        }else{
+          cb(new Error("students'email must be set."),null)
+        }
+      });
+    }
+
+    Enrollments.findById(data.enrollmentsId,[], function(err, enrollment){
+      if(err) throw err;
+      if(enrollment){
+        switch (enrollment.status) {
+          case 'reserved': startLesson(enrollment, cb); break;
+          default: cb(null,'status must be "reserve" . invalid status ' + enrollment.status)
+        }
+      } else {
+        cb(new Error('not found enrollment ' + id),null)
+      }
+    });
+  }
+
+  Teachers.remoteMethod(
+      'startHangout',
+      {
+        accepts: [
+          {arg: 'id', type: 'string', required: true},
+          {arg: 'data', type: '{ "enrollmentsId":"string","hangoutUrl": "string" }', required: true, http: { source: 'body' }}
+        ],
+        http: {path: '/:id/startHangout', verb: 'post'},
+        returns: {arg: 'result', type: 'string'}
+      }
+  );
 
 };

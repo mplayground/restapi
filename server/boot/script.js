@@ -11,6 +11,7 @@ module.exports = function(app) {
   app.models.AccessToken.destroyAll(function(err, info){});
   app.models.Teachers.destroyAll(function(err, info){});
   app.models.Lessons.destroyAll(function(err, info){});
+  app.models.Enrollments.destroyAll(function(err, info){});
 
   Role.create({name:'student'},function(err, role){});
   Role.create({name:'teacher'},function(err, role){});
@@ -70,38 +71,38 @@ module.exports = function(app) {
     initTestStudents()
   });
 
-  Role.registerResolver('teacher', function(role, context, cb) {
-
-    function reject(err) {
-      if(err) {
-        return cb(err);
-      }
-      cb(null, false);
-    }
-
-    console.log('registerResolver >> ' + context.modelName);
-
-    if (context.modelName !== 'lessons') {
-      // the target model is not project
-      return reject();
-    }
-
-    var userId = context.accessToken.userId;
-
-    console.log('registerResolver.userId >> ' + userId);
-
-    if (!userId) {
-      return reject(); // do not allow anonymous users
-    }
-
-    // check if userId is in team table for the given project id
-    context.model.findOne({ id:context.modelId, teachersId:userId }, function(err, lesson) {
-      if(err || !lesson){
-        reject(err);
-      }
-
-      console.log("Y can access Lesson");
-
-    });
-  });
+  // Role.registerResolver('teacher', function(role, context, cb) {
+  //
+  //   function reject(err) {
+  //     if(err) {
+  //       return cb(err);
+  //     }
+  //     cb(null, false);
+  //   }
+  //
+  //   console.log('registerResolver >> ' + context.modelName);
+  //
+  //   if (context.modelName !== 'lessons') {
+  //     // the target model is not project
+  //     return reject();
+  //   }
+  //
+  //   var userId = context.accessToken.userId;
+  //
+  //   console.log('registerResolver.userId >> ' + userId);
+  //
+  //   if (!userId) {
+  //     return reject(); // do not allow anonymous users
+  //   }
+  //
+  //   // check if userId is in team table for the given project id
+  //   context.model.findOne({ id:context.modelId, teachersId:userId }, function(err, lesson) {
+  //     if(err || !lesson){
+  //       reject(err);
+  //     }
+  //
+  //     console.log("Y can access Lesson");
+  //
+  //   });
+  // });
 }

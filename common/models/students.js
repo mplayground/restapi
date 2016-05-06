@@ -32,7 +32,7 @@ module.exports = function(Students) {
 
 
   // 모델에 저장되기전 호출
-  Students.observe('before save', function updateTimestamp(ctx, next) {
+  Students.observe('after save', function updateTimestamp(ctx, next) {
 
     var app = require('../../server/server');
     var Role = app.models.Role;
@@ -48,7 +48,7 @@ module.exports = function(Students) {
           principalId: ctx.instance.id
         }, function(err, principal) {
           if (err) throw err;
-          console.log('Created principal:', principal);
+          console.log('Created principal for Students:', principal);
           next();
         });
       });
