@@ -140,24 +140,25 @@ function onClientReady() {
   apiStatusDiv.innerHTML = '<p>Client ready</p>';
 
   // Now wait to see if the API is ready.
-  gapi.hangout.onApiReady.add(function(eventObj) {
-            if (eventObj.isApiReady) {
+  gapi.hangout.onApiReady.add(initHangout);
 
-              console.log("API is ready");
-
-              apiStatusDiv.innerHTML = '<p>API is ready</p>';
-              window.setTimeout(function() {
-                                  gapi.auth.setToken(generateToken());
-                                  updateParticipants();
-                                }, 1);
-              var hangoutUrl = gapi.hangout.getHangoutUrl();
-              console.log('hangoutUrl' + hangoutUrl)
-
-            }
-          });
-  document.getElementById('gd').innerHTML =
-      encodeURIComponent(getParameter('gd'));
+  document.getElementById('gd').innerHTML = encodeURIComponent(getParameter('gd'));
   document.getElementById('token').innerHTML = getParameter('token');
+}
+
+function initHangout(eventObj){
+  if (eventObj.isApiReady) {
+
+    console.log("API is ready");
+
+    apiStatusDiv.innerHTML = '<p>API is ready</p>';
+    window.setTimeout(function() {
+                        gapi.auth.setToken(generateToken());
+                        updateParticipants();
+                      }, 1);
+    var hangoutUrl = gapi.hangout.getHangoutUrl();
+    console.log("hangoutURL : " + hangoutUrl);
+  }
 }
 
 function generateToken() {
