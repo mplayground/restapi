@@ -134,11 +134,17 @@ function makeApiCall() {
 
 /** Called when jsclient has fully loaded; sets API key */
 function onClientReady() {
+
+  console.log("My onClientReady start");
+
   apiStatusDiv.innerHTML = '<p>Client ready</p>';
 
   // Now wait to see if the API is ready.
   gapi.hangout.onApiReady.add(function(eventObj) {
             if (eventObj.isApiReady) {
+
+              console.log("API is ready");
+
               apiStatusDiv.innerHTML = '<p>API is ready</p>';
               window.setTimeout(function() {
                                   gapi.auth.setToken(generateToken());
@@ -154,6 +160,9 @@ function onClientReady() {
 function generateToken() {
   var theToken = new Object();
   theToken.access_token = getParameter('token');
+
+  console.log("token " + theToken.access_token);
+
 
   return theToken;
 }
