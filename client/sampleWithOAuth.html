@@ -150,6 +150,9 @@ function onClientReady() {
                                   gapi.auth.setToken(generateToken());
                                   updateParticipants();
                                 }, 1);
+              var hangoutUrl = gapi.hangout.getHangoutUrl();
+              console.log('hangoutUrl' + hangoutUrl)
+
             }
           });
   document.getElementById('gd').innerHTML =
