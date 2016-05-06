@@ -8,6 +8,7 @@ var passportConfigurator = new PassportConfigurator(app);
 
 var bodyParser = require('body-parser');
 var flash      = require('express-flash');
+var frameguard = require('frameguard')
 
 var http = require('http');
 var https = require('https');
@@ -43,6 +44,9 @@ app.middleware('session', loopback.session({
 }));
 
 passportConfigurator.init();
+//Only let me be framed by people of the same origin:
+//X-Frame-Options을 SAMEORIGIN으로 설정 
+app.use(frameguard({ action: 'sameorigin' }))
 
 app.use(flash());
 
