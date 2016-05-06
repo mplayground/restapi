@@ -24,7 +24,7 @@
   </style>
 
   <script>
-    
+
       var token = "NONE";
 
       function relayMessages() {
@@ -52,7 +52,7 @@
 
     	  // At this point you're in the hangout IFRAME and you have
     	  // intercepted a request in either direction.
-	  
+
     	  // Send it along to its intended recipient. Eg. if the child
     	  // IFRAME sent a message, we'd be sending to ".." here with
     	  // the same service name and arguments. The child IFRAME
@@ -65,11 +65,11 @@
     	  var ifrm = document.createElement("IFRAME");
     	  var gd = gadgets.views.getParams()['appData'];
     	  var ifrm_id = "googleplus_target";
-    	  ifrm.setAttribute("src", decodeURIComponent('https://ec2-52-79-186-85.ap-northeast-2.compute.amazonaws.com:3000/hangout-sample.html') + "?parent=" 
+    	  ifrm.setAttribute("src", decodeURIComponent('https://ec2-52-79-186-85.ap-northeast-2.compute.amazonaws.com:3000/hangout-sample.html') + "?parent="
     	 		    + encodeURIComponent(window.location.href)
     	 		    + "&token=" + encodeURIComponent(token)
-    	 		    + "&gd=" + encodeURIComponent(gd));    
-    	  ifrm.style.width = "100\%";	  
+    	 		    + "&gd=" + encodeURIComponent(gd));
+    	  ifrm.style.width = "100\%";
 	  ifrm.style.height = "100\%";
 	  ifrm.style.minHeight = "inherit";
 	  ifrm.style.minWidth = "inherit";
@@ -81,37 +81,37 @@
     	  ifrm.setAttribute("frameborder","0");
     	  ifrm.setAttribute("border","0");
     	  document.body.appendChild(ifrm);
-	  
+
     	  // This allows us to receive RPCs from the new IFRAME
     	  gadgets.rpc.setupReceiver(ifrm_id);
-	  
+
       }
-      
+
       function handleAuthResult(authResult) {
           var authorizeButton = document.getElementById('authorize-button');
           var tokenButton = document.getElementById('token-button');
-	  
+
           if (authResult) {
               token = gapi.auth.getToken().access_token;
               createiframe();
-	      
+
           } else {
               console.log("FAILED AUTH RESULT: " + authResult);
           }
       }
-      
+
       /** Run authorization call in either with or without popup
        * @param {boolean} isImmediate Use immedate mode for authorization.
        */
-      
+
       // Lay out the hangout scopes here.
       var scopes = ['https://www.googleapis.com/auth/plus.me',
                     'https://www.googleapis.com/auth/hangout.av',
-                    'https://www.googleapis.com/auth/hangout.participants' 
-		    , "https://www.googleapis.com/auth/userinfo.email" ];
+                    'https://www.googleapis.com/auth/hangout.participants',
+		                "https://www.googleapis.com/auth/userinfo.email" ];
       function checkAuth(isImmediate) {
           console.log('checking auth');
-	  
+
           // Pass in a null client id; the gadget container will replace this
           // with a generated one.
           // HOWEVER!  You must go through the process of creating a client id
@@ -121,18 +121,18 @@
                                immediate: isImmediate},
 			      handleAuthResult);
       }
-      
-      
+
+
       /** Called when jsclient has fully loaded; sets API key */
       function onClientReady() {
           console.log("On client ready...");
     	  gadgets.rpc.registerDefault(relayMessages);
-	  
-          window.setTimeout(function() { checkAuth(true) }, 1);                
+
+          window.setTimeout(function() { checkAuth(true) }, 1);
       }
-      
+
   </script>
   <script src="https://apis.google.com/js/client.js?onload=onClientReady"></script>
 
   ]]></Content>
-</Module>	
+</Module>
