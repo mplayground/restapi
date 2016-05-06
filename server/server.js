@@ -45,8 +45,12 @@ app.middleware('session', loopback.session({
 
 passportConfigurator.init();
 //Only let me be framed by people of the same origin:
-//X-Frame-Options을 SAMEORIGIN으로 설정 
+//X-Frame-Options을 SAMEORIGIN으로 설정
 app.use(frameguard({ action: 'sameorigin' }))
+app.use(frameguard({
+  action: 'allow-from',
+  domain: 'https://ec2-52-79-186-85.ap-northeast-2.compute.amazonaws.com:3000'
+}))
 
 app.use(flash());
 
