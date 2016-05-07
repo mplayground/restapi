@@ -57,6 +57,8 @@ module.exports = function(Teachers) {
   Teachers.startHangout = function(id, data, cb) {
 
     var app = require('../../server/server');
+    var email = require('../../server/util.email');
+
     var Enrollments = app.models.Enrollments;
 
     console.log('start hangout. id:' + id + ', data:' + data.hangoutUrl);
@@ -69,8 +71,16 @@ module.exports = function(Teachers) {
           enrollment.updateAttributes({status:'start'},
             function(err,instance){
               if(err) throw err;
-              console.log('sendEmail to student[email:]' + student.email + '] with url :'+ data.hangoutUrl);
-              cb(null,'OK')
+              //TODO 선생님 Email 주소를 가져와야함.
+              email("", student.email , data.hangoutUrl, function(error, info){
+                if(err){
+                  console.log('fail to sendEmail to student[email:]' + student.email + '] with url :'+ data.hangoutUrl);
+                  cb(err,null)
+                }else{
+                  console.log('sendEmail to student[email:]' + student.email + '] with url :'+ data.hangoutUrl);
+                  cb(null,'OK')
+                }
+              });
             });
         }else{
           cb(new Error("students'email must be set."),null)
