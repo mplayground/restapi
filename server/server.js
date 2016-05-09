@@ -22,6 +22,26 @@ try {
   process.exit(1); // fatal
 }
 
+
+// SSI 적용 (HTML INCLUDE)
+var ssi = require("ssi");
+var path = require("path")
+var fs = require("fs")
+var client_path = __dirname.replace("server", "client")
+var parser = new ssi(client_path, "", "");
+
+app.use(function(req,res,next) {
+
+  var filename   = client_path+(req.path == "/" ? "/*.html" : req.path); // 모든 html을 인클루드 하기 위한 syntax
+
+  if(fs.existsSync(filename) && filename.indexOf(".html") > 0) {
+      res.send(parser.parse(filename, fs.readFileSync(filename, {encoding: "utf8"})).contents);
+  } else {
+      next();
+  }
+});
+
+
 boot(app, __dirname, function(err) {
   if (err) throw err;
   // start the server if `$ node server.js`
@@ -36,7 +56,7 @@ app.middleware('parse', bodyParser.urlencoded({
 app.middleware('auth', loopback.token({
   model: app.models.accessToken
 }));
-//app.middleware('session:before', loopback.cookieParser(app.get('cookieSecret')));
+app.middleware('session:before', loopback.cookieParser(app.get('cookieSecret')));
 app.middleware('session', loopback.session({
   secret: 'kitty',
   saveUninitialized: true,
@@ -68,8 +88,13 @@ for (var s in config) {
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 app.get('/auth/account', ensureLoggedIn('/Students/login'), function (req, res, next) {
-  res.redirect('/login_ok.html');
-  console.log(req.user);
+  res.redirect('/main.html');
+});
+
+app.get('/auth/logout', function (req, res, next) {
+  res.clearCookie('access_token');
+  req.logout();
+  res.redirect('/main.html');
 });
 
 app.start = function(httpOnly) {
@@ -77,6 +102,7 @@ app.start = function(httpOnly) {
     httpOnly = process.env.HTTP;
   }
   var server = null;
+
   if (!httpOnly) {
     var options = {
       key: sslConfig.privateKey,
@@ -86,6 +112,7 @@ app.start = function(httpOnly) {
   } else {
     server = http.createServer(app);
   }
+
   server.listen(app.get('port'), function() {
     var baseUrl = (httpOnly ? 'http://' : 'https://') + app.get('host') + ':' + app.get('port');
     app.emit('started', baseUrl);

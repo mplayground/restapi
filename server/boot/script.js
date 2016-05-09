@@ -12,6 +12,8 @@ module.exports = function(app) {
   app.models.Teachers.destroyAll(function(err, info){});
   app.models.Lessons.destroyAll(function(err, info){});
   app.models.Enrollments.destroyAll(function(err, info){});
+  app.models.userIdentity.destroyAll(function(err, info){});
+  app.models.userCredential.destroyAll(function(err, info){});
 
   Role.create({name:'student'},function(err, role){});
   Role.create({name:'teacher'},function(err, role){});
