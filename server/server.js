@@ -54,7 +54,7 @@ app.middleware('parse', bodyParser.urlencoded({
   extended: true
 }));
 app.middleware('auth', loopback.token({
-  model: app.models.accessToken
+  model: app.models.AccessToken
 }));
 app.middleware('session:before', loopback.cookieParser(app.get('cookieSecret')));
 app.middleware('session', loopback.session({
@@ -112,6 +112,8 @@ app.start = function(httpOnly) {
   } else {
     server = http.createServer(app);
   }
+
+  //server = http.createServer(app);
 
   server.listen(app.get('port'), function() {
     var baseUrl = (httpOnly ? 'http://' : 'https://') + app.get('host') + ':' + app.get('port');
