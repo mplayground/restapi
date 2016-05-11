@@ -28,7 +28,9 @@
     "passport": "^0.2.0",
     "passport-facebook": "^1.0.3",
     "passport-google-oauth": "^0.1.5",
+    "passport-local": "^1.0.0",
     "serve-favicon": "^2.0.1",
+    "ssi": "^0.3.0",
     "x-frame-options": "^1.0.0"
   },
   "devDependencies": {
