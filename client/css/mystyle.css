@@ -31,6 +31,12 @@ body{
     color:#000000;
 }
 
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
 
 /*
     Note: It is best to use a less version of this file ( see http://css2less.cc
@@ -101,4 +107,8 @@ body{
         text-align: right;
 		margin-top:10px;
  	}
+}
+
+.save-btn-with {
+    width: 200px !important;
 }
