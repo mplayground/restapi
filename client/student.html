@@ -4,27 +4,69 @@
   <li><a href="#">마이페이지</a></li>
 </ol>
 
+
+<!-- <div id="msgModal" class="modal fade" role="dialog"> -->
+  <!-- <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">쪽지</h4>
+      </div>
+      <div class="modal-body">
+        body
+      </div>
+    </div>
+  </div> -->
+<!-- <div> -->
+
 <!-- Page 시작 -->
 <div class="container">
   <div class="row">
     <div class="col-md-3">
       <div class="row">
-        <h2>이미지<h2><br>
-        버튼1<br>
-        버튼2
+        <img src="./images/bruce_shin.png" class="megia-object img-thumnail img-responsive"/>
+        <div>
+          <p style="padding:5px;"></p>
+        </div>
+        <div class="caption">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="profile_img" class="col-sm-4 control-label">사진변경</label>
+              <div class="col-sm-6">
+                <button type="button" id="profile_img" name="profile_img" class="btn btn-primary">변경</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="my_coins" class="col-sm-4 control-label">보유 코인</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="my_coins" name="my_coins" value="1000" readonly>
+              </div>
+              <div class="col-sm-4">
+                <button type="button" id="buy" name="buy" class="btn btn-success" data-toggle="modal" data-target="#buyCoinModel">코인구매</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="profile_img" class="col-sm-4 control-label">쪽지</label>
+              <div class="col-sm-6">
+                <button type="button" id="msg" name="msg" class="btn btn-info" data-toggle="modal" data-target="#loginModal">4/10</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 		<div class="col-md-9">
       <!-- Tab navigator -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#peter" aria-controls="peter" role="tab" data-toggle="tab">프로필</a></li>
-        <li role="presentation"><a href="#danny" aria-controls="danny" role="tab" data-toggle="tab">나의 예약</a></li>
+        <li role="presentation" class="active"><a href="#profile" aria-controls="peter" role="tab" data-toggle="tab">프로필</a></li>
+        <li role="presentation"><a href="#reserve" aria-controls="reserve" role="tab" data-toggle="tab">나의 예약</a></li>
         <li role="presentation"><a href="#complete" aria-controls="complete" role="tab" data-toggle="tab">수강 이력</a></li>
         <li role="presentation"><a href="#coin-history" aria-controls="coin-history" role="tab" data-toggle="tab">코인구매이력</a></li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane fade in active" id="peter">
+        <!-- profile -->
+        <div role="tabpanel" class="tab-pane fade in active" id="profile">
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <label for="name" class="col-sm-2 control-label">이름</label>
@@ -41,24 +83,22 @@
             <div class="form-group">
               <label for="instrument" class="col-sm-2 control-label">관심악기</label>
               <div class="col-sm-10">
-                <div class="btn-group" data-toggle="buttons-radio">
-                  <button type="button" class="btn btn-primary">기타</button>
-                  <button type="button" class="btn btn-primary">드럼</button>
-                  <button type="button" class="btn btn-primary">베이스</button>
-                  <button type="button" class="btn btn-primary">보컬</button>
-                  <button type="button" class="btn btn-primary">피아노</button>
-                </div>
+                <input type="radio" id="instrument1" name="instrument">기타</input>
+                <input type="radio" id="instrument2" name="instrument">드럼</input>
+                <input type="radio" id="instrument3" name="instrument">베이스</input>
+                <input type="radio" id="instrument4" name="instrument">보컬</input>
+                <input type="radio" id="instrument5" name="instrument">피아노</input>
               </div>
             </div>
             <div class="form-group">
               <label for="genre" class="col-sm-2 control-label">선호장르</label>
               <div class="col-sm-10">
                 <div class="btn-group" data-toggle="buttons-radio">
-                  <button type="button" class="btn btn-primary">락</button>
-                  <button type="button" class="btn btn-primary">블루스</button>
-                  <button type="button" class="btn btn-primary">재즈</button>
-                  <button type="button" class="btn btn-primary">컨트리</button>
-                  <button type="button" class="btn btn-primary">퓨전재즈</button>
+                  <input type="checkbox" id="instrument1" name="instrument">락</input>
+                  <input type="checkbox" id="instrument2" name="instrument">블루스</input>
+                  <input type="checkbox" id="instrument3" name="instrument">재즈</input>
+                  <input type="checkbox" id="instrument4" name="instrument">컨트리</input>
+                  <input type="checkbox" id="instrument5" name="instrument">퓨전재즈</input>
                 </div>
               </div>
             </div>
@@ -113,17 +153,136 @@
                 </div>
               </div>
             </div>
-
           </form>
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="danny">
-          reserve
+        <!-- 나의 예약 -->
+        <div role="tabpanel" class="tab-pane fade" id="reserve">
+          <div class="row row-content">
+            <div class="col-xs-12 col-sm-2">
+              05.15 Sun<br>
+              <h3>21:00</h3>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+              <div class="row row-content">
+              <h4>Paul 선생님과 Rock Solo 완성</h4>
+              </div>
+              <div class="row row-content">
+              <h3>선생님 : Paul Gilbert<h3>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-2">
+              <div class="row row-content">
+              수업시간 : 60M<br>
+              코인 : 10
+              </div>
+              <div class="row row-content">
+              <button type="button" class="btn btn-success">수강하기</button>
+              </div>
+            </div>
+            <div class="row omb_row-sm-offset-3 omb_loginOr">
+              <div class="col-xs-12 col-sm-6">
+              <hr class="omb_hrOr">
+              </div>
+            </div>
+          </div>
+          <div class="row row-content">
+            <div class="col-xs-12 col-sm-2">
+              05.15 Sun<br>
+              <h3>21:00</h3>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+              <div class="row row-content">
+              <h4>Paul 선생님과 Rock Solo 완성</h4>
+              </div>
+              <div class="row row-content">
+              <h3>선생님 : Paul Gilbert<h3>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-2">
+              <div class="row row-content">
+              수업시간 : 60M<br>
+              코인 : 10
+              </div>
+              <div class="row row-content">
+              <button type="button" class="btn btn-success">수강하기</button>
+              </div>
+            </div>
+            <div class="row omb_row-sm-offset-3 omb_loginOr">
+              <div class="col-xs-12 col-sm-6">
+              <hr class="omb_hrOr">
+              </div>
+            </div>
+          </div>
         </div>
+        <!-- 수강 이력 -->
         <div role="tabpanel" class="tab-pane" id="complete">
-          complete
+          <div class="row row-content">
+            <div class="col-md-12">
+              <div class="table-responsive">
+              <table class="table table-striped">
+                <tr>
+                  <th>일시</th>
+                  <th>선생님</th>
+                  <th>수업</th>
+                  <th>티켓상용</th>
+                  <th>잔여</th>
+                </tr>
+                <tr>
+                  <td>2016-05-30</td>
+                  <td>Paul Gilbert</td>
+                  <td>Paul 과 함께하는 Rock Solo 완성</td>
+                  <td>-10</td>
+                  <td>80</td>
+                </tr>
+                <tr>
+                  <td>2016-05-30</td>
+                  <td>Paul Gilbert</td>
+                  <td>Paul 과 함께하는 Rock Solo 완성</td>
+                  <td>-10</td>
+                  <td>90</td>
+                </tr>
+                <tr>
+                  <td>2016-05-30</td>
+                  <td>Paul Gilbert</td>
+                  <td>Paul 과 함께하는 Rock Solo 완성</td>
+                  <td>-10</td>
+                  <td>100</td>
+                </tr>
+              </table>
+              </div>
+            </div>
+          </div>
         </div>
+        <!-- 코인구매 이력 -->
         <div role="tabpanel" class="tab-pane" id="coin-history">
-          coin-history
+          <div class="row row-content">
+            <div class="col-md-12">
+              <div class="table-responsive">
+              <table class="table table-striped">
+                <tr>
+                  <th>일시</th>
+                  <th>구입토큰</th>
+                  <th>잔여토큰</th>
+                </tr>
+                <tr>
+                  <td>2016-05-30</td>
+                  <td>100</td>
+                  <td>200</td>
+                </tr>
+                <tr>
+                  <td>2016-04-30</td>
+                  <td>100</td>
+                  <td>100</td>
+                </tr>
+                <tr>
+                  <td>2016-05-30</td>
+                  <td>100</td>
+                  <td>0</td>
+                </tr>
+              </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Tab panes end -->
@@ -142,4 +301,128 @@
   </div>
 </div>
 
+<div id="loginModal" name="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">쪽지</h4>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+          <table class="table table-striped">
+            <tr>
+              <th>일시</th>
+              <th>선생님</th>
+              <th>메시지</th>
+            </tr>
+            <tr>
+              <td>2016-05-30</td>
+              <td>Paul Gilbert</td>
+              <td>Rock Solo을 잘 따라와 주고 있습니다.</td>
+            </tr>
+            <tr>
+              <td>2016-05-30</td>
+              <td>Paul Gilbert</td>
+              <td>Rock Solo을 잘 따라와 주고 있습니다.</td>
+            </tr>
+            <tr>
+              <td>2016-05-30</td>
+              <td>Paul Gilbert</td>
+              <td>Rock Solo을 잘 따라와 주고 있습니다.</td>
+            </tr>
+          </table>
+          </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div id="buyCoinModel" name="buyCoinModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">코인구매</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <h4><span class="label label-info">코인선택</span></h4>
+            <div class="row">
+              <div class="col-md-3">
+                40개
+              </div>
+              <div class="col-md-3">
+                150,000원
+              </div>
+              <div class="col-md-3">
+                <input type="radio" id="coin_type1" name="coin_type" checked="checked" value="1"/>
+              </div>
+              <div class="row omb_row-sm-offset-3 omb_loginOr">
+                <div class="col-xs-12 col-sm-6">
+                <hr class="omb_hrOr">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                80개
+              </div>
+              <div class="col-md-3">
+                280,000원<br>
+                10% 할인
+              </div>
+              <div class="col-md-3">
+                <input type="radio" id="coin_type2" name="coin_type" value="1"/>
+              </div>
+              <div class="row omb_row-sm-offset-3 omb_loginOr">
+                <div class="col-xs-12 col-sm-6">
+                <hr class="omb_hrOr">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                120개
+              </div>
+              <div class="col-md-3">
+                280,000원<br>
+                15% 할인
+              </div>
+              <div class="col-md-3">
+                <input type="radio" id="coin_type3" name="coin_type"value="1"/>
+              </div>
+            </div>
+            <h4><span class="label label-info">결제수단</span></h4>
+            <div>
+                <input type="radio" id="pay1" name="pay_type" checked="checked" value="1" /> 신용카드
+                <input type="radio" id="pay2" name="pay_type" value="2" /> 휴대폰결제
+                <input type="radio" id="pay1" name="pay_type" value="3" /> 계좌이체
+            </div>
+            <span class="help-block"></span>
+            <h4><span class="label label-info">결제하기</span></h4>
+            <div class="row">
+              <div class="col-md-12">
+                <h4><p class="text-right text-warning">결제 토큰 갯수 : 120개</p></h4>
+              </div>
+              <div class="col-md-12">
+                <h4><p class="text-right text-warning">결제 금액 : 280,000원</p></h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4">
+                  <button id="singlebutton" name="singlebutton" class="btn btn-primary center-block save-btn-with">결제하기
+                  </button>
+                </div>
+              </div>
+            </div>
+          </from>
+        </div>
+    </div>
+    </div>
+</div>
 <!--#include virtual="design_footer.html" -->
