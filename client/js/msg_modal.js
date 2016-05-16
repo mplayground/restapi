@@ -6,7 +6,7 @@ var MsgTable = React.createClass({
   },
   componentDidMount: function() {
     $.ajax({
-      url: 'msg.json',
+      url: this.props.url,
       dataType: 'json',
       error: function(){
         console.log("error")
@@ -73,7 +73,7 @@ var MsgModal = React.createClass({
             <h4 className="modal-title">쪽지</h4>
           </div>
           <div className="modal-body">
-            <MsgTable/>
+            <MsgTable url={this.props.url}/>
           </div>
         </div>
         </div>
@@ -83,6 +83,6 @@ var MsgModal = React.createClass({
 });
 
 ReactDOM.render(
-  <MsgModal/>,
+  <MsgModal url="msg.json"/>,
   document.getElementById('msgModalDiv')
 );
