@@ -192,7 +192,7 @@ var CoinModal = React.createClass({
     ];
 
     return (
-      <div id="buyCoinModel" name="buyCoinModel" className="modal fade" role="dialog">
+      <div id="buyCoinModal" name="buyCoinModal" className="modal fade" role="dialog">
           <div className="modal-dialog">
           <div className="modal-content">
               <div className="modal-header">
@@ -255,5 +255,5 @@ var CoinModal = React.createClass({
 
 ReactDOM.render(
   <CoinModal/>,
-  document.getElementById('coinModal')
+  document.getElementById('coinModalDiv')
 );

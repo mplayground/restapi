@@ -6,6 +6,7 @@
 
 <script type="text/babel" src="js/student.js"></script>
 <script type="text/babel" src="js/coin_modal.js"></script>
+<script type="text/babel" src="js/msg_modal.js"></script>
 
 <!-- Page 시작 -->
 <div class="container">
@@ -30,13 +31,13 @@
                 <input type="text" class="form-control" id="my_coins" name="my_coins" value="1000" readonly>
               </div>
               <div class="col-sm-4">
-                <button type="button" id="buy" name="buy" class="btn btn-success" data-toggle="modal" data-target="#buyCoinModel">코인구매</button>
+                <button type="button" id="buy" name="buy" class="btn btn-success" data-toggle="modal" data-target="#buyCoinModal">코인구매</button>
               </div>
             </div>
             <div class="form-group">
               <label for="profile_img" class="col-sm-4 control-label">쪽지</label>
               <div class="col-sm-6">
-                <button type="button" id="msg" name="msg" class="btn btn-info" data-toggle="modal" data-target="#loginModal">4/10</button>
+                <button type="button" id="msg" name="msg" class="btn btn-info" data-toggle="modal" data-target="#msgModal">4/10</button>
               </div>
             </div>
           </form>
@@ -289,43 +290,6 @@
   </div>
 </div>
 
-<div id="loginModal" name="loginModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">쪽지</h4>
-        </div>
-        <div class="modal-body">
-          <div class="table-responsive">
-          <table class="table table-striped">
-            <tr>
-              <th>일시</th>
-              <th>선생님</th>
-              <th>메시지</th>
-            </tr>
-            <tr>
-              <td>2016-05-30</td>
-              <td>Paul Gilbert</td>
-              <td>Rock Solo을 잘 따라와 주고 있습니다.</td>
-            </tr>
-            <tr>
-              <td>2016-05-30</td>
-              <td>Paul Gilbert</td>
-              <td>Rock Solo을 잘 따라와 주고 있습니다.</td>
-            </tr>
-            <tr>
-              <td>2016-05-30</td>
-              <td>Paul Gilbert</td>
-              <td>Rock Solo을 잘 따라와 주고 있습니다.</td>
-            </tr>
-          </table>
-          </div>
-        </div>
-    </div>
-    </div>
-</div>
-
-<div id="coinModal"></div>
+<div id="msgModalDiv"></div>
+<div id="coinModalDiv"></div>
 <!--#include virtual="design_footer.html" -->
