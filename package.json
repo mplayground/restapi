@@ -29,6 +29,7 @@
     "passport-facebook": "^1.0.3",
     "passport-google-oauth": "^0.1.5",
     "passport-local": "^1.0.0",
+    "react-bootstrap": "^0.29.4",
     "serve-favicon": "^2.0.1",
     "ssi": "^0.3.0",
     "x-frame-options": "^1.0.0"
