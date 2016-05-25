@@ -82,7 +82,4 @@ var MsgModal = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <MsgModal url="msg.json"/>,
-  document.getElementById('msgModalDiv')
-);
+export default MsgModal

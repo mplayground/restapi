@@ -1,10 +1,10 @@
+import RadioButtonGroup from './RadioButtonGroup';
 
 const {PropTypes} = React;
 
 const CoinTypeRadioButton = React.createClass({
   render: function() {
     const {count, price, name, value, checked, label} = this.props;
-
     return (
       <div className="row">
         <div className="col-md-3">
@@ -67,71 +67,6 @@ const CoinTypeRadioButtonGroup = React.createClass({
           key={`radio-button-${value}`}
           count={count}
           price={price}
-          label={label}
-          name={name}
-          value={value}
-          checked={checked}
-          onChange={onChange}
-        />
-      );
-    });
-
-    return (
-      <div>
-        {choiceItems}
-      </div>
-    );
-  }
-});
-
-const RadioButton = React.createClass({
-  render: function() {
-    const {name, value, checked, label} = this.props;
-
-    return (
-      <label>
-        <input
-          type='radio'
-          name={name}
-          value={value}
-          checked={checked}
-          onChange={this.handleChange}
-        />
-        {label}
-      </label>
-    );
-  },
-
-  handleChange: function() {
-    const {value, onChange} = this.props;
-    onChange(value);
-  }
-});
-
-const RadioButtonGroup = React.createClass({
-  propTypes: {
-    name: PropTypes.string,
-    checkedValue: PropTypes.string,
-    choices: PropTypes.array,
-    onChange: PropTypes.func,
-  },
-
-  getDefaultProps: function() {
-    return {
-      checkedValue: ''
-    };
-  },
-
-  render: function() {
-    const {choices, checkedValue, onChange} = this.props;
-
-    const choiceItems = choices.map(choice => {
-      const {value, label} = choice;
-      const checked = value === checkedValue;
-
-      return (
-        <RadioButton
-          key={`radio-button-${value}`}
           label={label}
           name={name}
           value={value}
@@ -253,7 +188,4 @@ var CoinModal = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <CoinModal/>,
-  document.getElementById('coinModalDiv')
-);
+export default CoinModal
