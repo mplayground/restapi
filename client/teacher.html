@@ -6,84 +6,159 @@
 <script src='/fullcalendar/fullcalendar.js'></script>
 
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
 
     // page is now ready, initialize the calendar...
 
     var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
 
-		$('#calendar').fullCalendar({
-			header : {
-				left : 'prev,next today',
-				center : 'title',
-				right : 'month,agendaWeek,agendaDay'
-			},
+    $('#calendar').fullCalendar({
+      header : {
+        left : 'prev,next today',
+        center : 'title',
+        right : 'month,agendaWeek,agendaDay'
+      },
+      selectable: true,
+      selectHelper: true,
+      selectOverlap: false,
+      //minTime: '06:00:00',
+      allDaySlot: false,
+      editable: false,
+      disableDragging: false,
+      disableResizing: false,
       dayClick: function(date, jsEvent, view) {
         console.log(view);
         // 날짜를 클릭하면 해당 날의 스케쥴로 이동
         if(view.name == "month") {
           $('#calendar').fullCalendar('gotoDate', date);
           $('#calendar').fullCalendar('changeView', 'agendaDay');
-        } else {
-
+        }
+      },
+      select: function(start, end, allDay, view) {
+        // view가 달이 아니면 스케쥴 등록가능
+        if(view.name != "month") {
+          setEvent(0, "", start, end);
         }
       },
       eventClick: function(calEvent, jsEvent, view) {
-        // 이벤트 클릭하면 삭제하겠는지 물어봄.
-        // 단 학생이 예약한 상태라면 삭제 불가? 정책 확인 필요
-        $("#event_detail").html(calEvent.id);
-
-        if(confirm("일정을 삭제하시겠습니까?")) {
-          $('#calendar').fullCalendar('removeEvents', calEvent.id);
-        }
+        setEvent(calEvent.id, calEvent.title, calEvent.start, calEvent.end);
       },
-			events : [ {
-  				title : 'All Day Event',
-  				start : new Date(y, m, 1)
-  			}, {
-  				title : 'Long Event',
-  				start : new Date(y, m, d - 5),
-  				end : new Date(y, m, d - 2)
-  			}, {
-  				id : 999,
-  				title : 'Repeating Event',
-  				start : new Date(y, m, d - 3, 16, 0),
-  				allDay : false
-  			}, {
-  				id : 999,
-  				title : 'Repeating Event',
-  				start : new Date(y, m, d + 4, 16, 0),
-  				allDay : false
-  			}, {
-  				title : 'Meeting',
-  				start : new Date(y, m, d, 10, 30),
-  				allDay : false
-  			}, {
-  				title : 'Lunch',
-  				start : new Date(y, m, d, 12, 0),
-  				end : new Date(y, m, d, 14, 0),
-  				allDay : false
-  			}, {
-  				title : 'Birthday Party',
-  				start : new Date(y, m, d + 1, 19, 0),
-  				end : new Date(y, m, d + 1, 22, 30),
-  				allDay : false
-  			}, {
-  				title : 'Click for Google',
-  				start : new Date(y, m, 28),
-  				end : new Date(y, m, 29),
-  				url : 'http://google.com/'
-  			} ]
-		});
+      events : []
+    });
+  });
 
+  // 이벤트 세팅
+  function setEvent(id, title, start, end) {
+    $("#event_id").val(id);
+    $("#event_title").val(title);
+    $("#event_start_date").val(start.format('YYYY-MM-DD'));
+    $("#event_start_time").val(start.format('HH:mm'));
+    $("#event_end_date").val(end.format('YYYY-MM-DD'));
+    $("#event_end_time").val(end.format('HH:mm'));
 
-});
+    showModal();
+
+  }
+
+  // 이벤트 등록
+  function addEvent() {
+    var event_id = getNewId();
+    var event_title = $("#event_title").val();
+    console.log(event_title);
+    var start_date = $("#event_start_date").val() + "T" + $("#event_start_time").val();
+    var end_date = $("#event_end_date").val() + "T" + $("#event_end_time").val();
+
+    $('#calendar').fullCalendar('addEventSource', {
+      events: [{id: event_id, title: event_title, start: start_date, end: end_date}]
+    });
+
+    closeModal();
+  }
+
+  // 이벤트 삭제
+  function delEvent() {
+    var event_id = $("#event_id").val();
+    if(confirm("일정을 삭제하시겠습니까?")) {
+      $('#calendar').fullCalendar('removeEvents', event_id);
+    }
+
+    closeModal();
+  }
+
+  // 이벤트 아이디를 가져오기 위한 임시코드
+  var new_id = 0;
+  function getNewId() {
+    new_id++;
+    return new_id;
+  }
+
+  function showModal() {
+    $("#modal_open_btn").click();
+  }
+
+  function closeModal() {
+    $("#modal_open_btn").click();
+  }
 </script>
-<div id="event_detail"></div>
+
 
 <div id='calendar' style="width:800px;height:800px;"></div>
 
+<!-- 자바스크립트로 모달을 열기위해서 버튼이 필요한건가..ㅡ.ㅡ -->
+<div style="display:none;">
+<button id="modal_open_btn" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button id="modal_close_btn" type="button" class="close" data-dismiss="modal">&times;</button>
+         <h4 class="modal-title">이벤트</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" class="form-control" id="event_id" name="event_id" placeholder="">
+        <div class="form-group">
+          <label for="event_title" class="col-sm-2 control-label">제목</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="event_title" name="event_title" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="event_start_date" class="col-sm-2 control-label">시작날짜</label>
+          <div class="col-xs-3">
+            <label for="event_start_date"></label>
+            <input type="text" class="form-control" id="event_start_date" name="event_start_date">
+          </div>
+          <div class="col-xs-2">
+            <label for="event_start_time"></label>
+            <input type="text" class="form-control" id="event_start_time" name="event_start_time">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="event_start_date" class="col-sm-2 control-label">종료날짜</label>
+          <div class="col-xs-3">
+            <label for="event_end_date"></label>
+            <input type="text" class="form-control" id="event_end_date" name="event_end_date">
+          </div>
+          <div class="col-xs-2">
+            <label for="event_end_time"></label>
+            <input type="text" class="form-control" id="event_end_time" name="event_end_time">
+          </div>
+        </div>
+        <button class="btn btn-primary center-block save-btn-with" onClick="addEvent();">등록</button>
+        <button class="btn btn-primary center-block save-btn-with" onClick="delEvent();">삭제</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <!--#include virtual="design_footer.html" -->
