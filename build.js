@@ -2,29 +2,25 @@ var fs = require("fs");
 var browserify = require("browserify");
 var watchify = require('watchify');
 
-//TODO 화면별로 하나씩 만들어줘야하나?
-browserify(
-  ["./client/src/student.js"]
-  ).transform("babelify", {presets: ["es2015", "react"]})
-  .bundle()
-  .pipe(fs.createWriteStream("./client/dist/bundle.js"));
+registerBrowserify("./client/src/student.js","./client/dist/bundle.js")
+registerBrowserify("./client/src/student.js","./client/dist/student.js")
+// registerBrowserify("./client/src/test-react-bootstrap.js","./client/dist/test-react-bootstrap.js")
+// registerBrowserify("./client/src/test-tab.js","./client/dist/test-tab.js")
 
-browserify(
-  ["./client/src/student.js"]
-  ).transform("babelify", {presets: ["es2015", "react"]})
-  .bundle()
-  .pipe(fs.createWriteStream("./client/dist/student.js"));
+function registerBrowserify(src, dest){
 
-var b = browserify({
-  entries:["./client/src/test-react-bootstrap.js"],
-  cache: {},
-  packageCache: {},
-  plugin: [watchify]
-}).transform("babelify", {presets: ["es2015", "react"]});
+  var b = browserify({
+      entries:[src],
+      cache: {},
+      packageCache: {},
+      plugin: [watchify]
+    }).transform("babelify", {presets: ["es2015", "react"]});
 
-b.on("update",bundle);
-bundle();
+  function bundleInner(){
+    b.bundle().pipe(fs.createWriteStream(dest));
+  }
 
-function bundle(){
-  b.bundle().pipe(fs.createWriteStream("./client/dist/test-react-bootstrap.js"));
+  b.on("update",bundleInner);
+
+  bundleInner(b,dest);
 }
