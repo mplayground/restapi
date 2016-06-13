@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {
-    "start": "node .",
+    "start": "npm run serve | npm run dev",
     "pretest": "jshint .",
     "posttest": "nsp check",
-    "build-js": "node build.js"
+    "build-js": "node build.js",
+    "serve": "./node_modules/.bin/http-server -p 8080",
+    "dev": "webpack-dev-server --content-base client/ --progress --colors --port 8090"
   },
   "dependencies": {
     "async": "~0.9.0",
@@ -30,6 +32,8 @@
     "passport-facebook": "^1.0.3",
     "passport-google-oauth": "^0.1.5",
     "passport-local": "^1.0.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
     "react-bootstrap": "^0.29.4",
     "serve-favicon": "^2.0.1",
     "ssi": "^0.3.0",
@@ -37,13 +41,17 @@
     "x-frame-options": "^1.0.0"
   },
   "devDependencies": {
+    "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.3.0",
     "watchify": "^3.7.0",
     "browserify": "^13.0.1",
     "jshint": "^2.5.6",
-    "nsp": "^2.1.0"
+    "nsp": "^2.1.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "jsx-loader": "^0.13.2"
   },
   "repository": {
     "type": "",
