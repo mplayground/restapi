@@ -19,54 +19,109 @@
         }
     });
   }
+
+  function loginTeacher() {
+    var username = $("input[name=username_teacher]").val();
+    var password = $("input[name=password_teacher]").val();
+
+    $.ajax({
+        url: "/api/Teachers/login",
+        method: "post",
+        data: {username: username, password: password},
+        dataType : 'json',
+        cache: false,
+        success: function(data) {
+            location.href = "/main.html";
+        },
+        error: function(request, status, error) {
+          alert("request.status : " + request.status);
+        }
+    });
+  }
 </script>
 <div class="container">
 
   <div class="omb_login">
 
-    <span class="help-block"></span>
-
-    <div class="row omb_row-sm-offset-3 omb_socialButtons">
-          <div class="col-xs-4 col-sm-2">
-            <a href="/auth/facebook" class="btn btn-lg btn-block omb_btn-facebook">
-              <i class="fa fa-facebook visible-xs"></i>
-              <span class="hidden-xs">Facebook</span>
-            </a>
-          </div>
-          <div class="col-xs-4 col-sm-2">
-            <a href="/auth/google" class="btn btn-lg btn-block omb_btn-google">
-              <i class="fa fa-google-plus visible-xs"></i>
-              <span class="hidden-xs">Google+</span>
-            </a>
-          </div>
+    <div class="col-md-9">
+      <span class="help-block"></span>
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#student_login" aria-controls="peter" role="tab" data-toggle="tab">학생 로그인</a></li>
+        <li role="presentation"><a href="#teacher_login" aria-controls="reserve" role="tab" data-toggle="tab">강사 로그인</a></li>
+      </ul>
     </div>
 
-    <div class="row omb_row-sm-offset-3 omb_loginOr">
-      <div class="col-xs-12 col-sm-6">
-        <hr class="omb_hrOr">
-        <span class="omb_spanOr">or</span>
+    <div class="tab-content">
+      <!-- 학생로그인 -->
+      <div role="tabpanel" class="tab-pane fade in active" id="student_login">
+        <div class="row omb_row-sm-offset-3 omb_socialButtons">
+              <div class="col-xs-4 col-sm-2">
+                <a href="/auth/facebook" class="btn btn-lg btn-block omb_btn-facebook">
+                  <i class="fa fa-facebook visible-xs"></i>
+                  <span class="hidden-xs">Facebook</span>
+                </a>
+              </div>
+              <div class="col-xs-4 col-sm-2">
+                <a href="/auth/google" class="btn btn-lg btn-block omb_btn-google">
+                  <i class="fa fa-google-plus visible-xs"></i>
+                  <span class="hidden-xs">Google+</span>
+                </a>
+              </div>
+        </div>
+
+        <div class="row omb_row-sm-offset-3 omb_loginOr">
+          <div class="col-xs-12 col-sm-6">
+            <hr class="omb_hrOr">
+            <span class="omb_spanOr">or</span>
+          </div>
+        </div>
+
+        <div class="row omb_row-sm-offset-3">
+          <div class="col-xs-12 col-sm-6">
+
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" name="username" placeholder="username">
+              </div>
+              <span class="help-block"></span>
+
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input  type="password" class="form-control" name="password" placeholder="Password">
+              </div>
+              <span class="help-block"><!--Password error--></span>
+
+              <button class="btn btn-lg btn-primary btn-block" onClick="login();">Login</button>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 강사로그인 -->
+      <div role="tabpanel" class="tab-pane fade" id="teacher_login">
+        <div class="row omb_row-sm-offset-3">
+          <div class="col-xs-12 col-sm-6">
+
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" name="username_teacher" placeholder="username_teacher">
+              </div>
+              <span class="help-block"></span>
+
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input  type="password" class="form-control" name="password_teacher" placeholder="Password_teacher">
+              </div>
+              <span class="help-block"><!--Password error--></span>
+
+              <button class="btn btn-lg btn-primary btn-block" onClick="loginTeacher();">Login</button>
+
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="row omb_row-sm-offset-3">
-      <div class="col-xs-12 col-sm-6">
 
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            <input type="text" class="form-control" name="username" placeholder="username">
-          </div>
-          <span class="help-block"></span>
-
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-            <input  type="password" class="form-control" name="password" placeholder="Password">
-          </div>
-          <span class="help-block"><!--Password error--></span>
-
-          <button class="btn btn-lg btn-primary btn-block" onClick="login();">Login</button>
-
-      </div>
-    </div>
   </div>
 </div>
 <!--#include virtual="design_footer.html" -->

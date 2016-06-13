@@ -71,6 +71,8 @@ module.exports = function(Students) {
                 signed: req.signedCookies ? true : false,
                 maxAge: 1000 * accessToken.ttl
             });
+            res.cookie('login_type', 'student');
+
             return res.redirect('/');
         }
     }

@@ -24,6 +24,24 @@ module.exports = function(Teachers) {
   Teachers.disableRemoteMethod('__get__accessTokens', false);
   Teachers.disableRemoteMethod('__updateById__accessTokens', false);
 
+
+  Teachers.afterRemote('login', function setLoginCookie(context, accessToken, next) {
+    var res = context.res;
+    var req = context.req;
+
+    if (accessToken != null) {
+        if (accessToken.id != null) {
+            res.cookie('access_token', accessToken.id, {
+                signed: req.signedCookies ? true : false,
+                maxAge: 1000 * accessToken.ttl
+            });
+            res.cookie('login_type', 'teacher');
+
+            return res.redirect('/');
+        }
+    }
+    return next();
+  });
   // 모델에 저장되기전 호출
   Teachers.observe('after save', function updateTimestamp(ctx, next) {
 
