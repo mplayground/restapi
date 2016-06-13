@@ -1,32 +1,22 @@
-import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-// import { CoinModal } from './CoinModal';
-// import { MsgModal } from './MsgModal';
+import { Button } from 'react-bootstrap';
 
-// ReactDOM.render(
-//   <MsgModal url="msg.json"/>,
-//   document.getElementById('msgModalDiv')
-// );
-// ReactDOM.render(
-//   <CoinModal/>,
-//   document.getElementById('coinModalDiv')
-// );
-
-class CommentsModalButton extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = { show: false };
-  }
+const Trigger = React.createClass({
+  getInitialState() {
+    return { show: false };
+  },
 
   render() {
     let close = () => this.setState({ show: false});
+
     return (
-      <div>
+      <div className="modal-container" style={{height: 200}}>
         <Button
           bsStyle="primary"
+          bsSize="large"
           onClick={() => this.setState({ show: true})}
         >
-          Launch
+          Launch contained modal
         </Button>
 
         <Modal
@@ -48,9 +38,11 @@ class CommentsModalButton extends React.Component{
       </div>
     );
   }
-}
+});
 
-ReactDOM.render(
-  <CommentsModalButton/>,
-  document.getElementById('commentsButtonModal')
-);
+ReactDOM.render(<Trigger />, document.getElementById('commentsButtonModal'));
+
+// ReactDOM.render(
+//   <CommentsModalButton/>,
+//   document.getElementById('commentsButtonModal')
+// );

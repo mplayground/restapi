@@ -1,38 +1,48 @@
-var MsgTable = React.createClass({
-  getInitialState: function () {
-      return {
-          data: []
-      };
-  },
-  componentDidMount: function() {
+import { Table } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+
+class MsgTable extends React.Component{
+
+  constructor(props){
+    super(props);
+    this.state = { data:[] }
+  }
+
+  loadCommentsFromServer(){
     $.ajax({
       url: this.props.url,
       dataType: 'json',
       error: function(){
         console.log("error")
       },
-      success: function(data) {
-        this.setState({data: data});
+      success: function(comments) {
+        this.setState({ data: comments });
       }.bind(this)
     });
-  },
-  render: function() {
+  }
+
+  componentDidMount() {
+    this.loadCommentsFromServer();
+  }
+
+  render() {
     return(
       <div>
-        <Table result={this.state.data}/>
+        <MyTable result={this.state.data}/>
       </div>
     );
   }
-});
+}
 
-var Table = React.createClass({
-  render:function(){
-    var result = this.props.result.map(function(result,index){
+class MyTable extends React.Component{
+
+  render(){
+    var tableRow = this.props.result.map(function(result,index){
       return <TableRow key={index} row={ result } />
     });
+
     return(
-      <div className="table-responsive">
-      <table className="table table-striped">
+      <Table striped bordered condensed hover>
         <thead className="thead-default" align="center">
           <tr>
             <th>날짜</th>
@@ -41,45 +51,44 @@ var Table = React.createClass({
           </tr>
         </thead>
         <tbody align="center">
-          {result}
+          {tableRow}
         </tbody>
-      </table>
-      </div>
+      </Table>
     );
   }
-});
+}
 
-var TableRow = React.createClass({
-    render:function(){
-        var row = this.props.row;
-        return(
-          <tr>
-            <td>{row.date}</td>
-            <td>{row.teacher}</td>
-            <td>{row.msg}</td>
-          </tr>
-        );
-    }
-});
+class TableRow extends React.Component{
+  render(){
+      var row = this.props.row;
+      return(
+        <tr>
+          <td>{row.date}</td>
+          <td>{row.teacher}</td>
+          <td>{row.msg}</td>
+        </tr>
+      );
+  }
+}
 
-var MsgModal = React.createClass({
-  render: function() {
+export class MsgModal extends React.Component{
+
+  constructor(props){
+    super(props)
+    console.log('MsgModal ' + this.props.show);
+  }
+
+  render() {
     return (
-      <div id="msgModal" name="msgModal" className="modal fade" role="dialog">
-        <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <button type="button" className="close" data-dismiss="modal">&times;</button>
-            <h4 className="modal-title">쪽지</h4>
-          </div>
-          <div className="modal-body">
-            <MsgTable url={this.props.url}/>
-          </div>
-        </div>
-        </div>
-      </div>
+      <Modal show={this.props.show} onHide={this.props.onHide}>
+        <Modal.Header closeButton>
+          <Modal.Title>쪽지</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        </Modal.Body>
+      </Modal>
     );
   }
-});
+}
 
-export default MsgModal
+MsgModal.propTypes = { showModal: React.PropTypes.bool };
