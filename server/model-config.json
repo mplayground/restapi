@@ -70,10 +70,10 @@
   },
   "StudentAccessToken": {
     "dataSource": "MongoDB",
-    "public": false
+    "public": true
   },
   "TeacherAccessToken": {
     "dataSource": "MongoDB",
-    "public": false
+    "public": true
   }
 }

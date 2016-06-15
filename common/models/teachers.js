@@ -36,6 +36,7 @@ module.exports = function(Teachers) {
                 maxAge: 1000 * accessToken.ttl
             });
             res.cookie('login_type', 'teacher');
+            res.cookie('userId', accessToken.userId);
 
             return res.redirect('/');
         }

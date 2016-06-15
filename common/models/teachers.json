@@ -20,9 +20,9 @@
   },
   "validations": [],
   "relations": {
-    "lessons": {
+    "enrollments": {
       "type": "hasMany",
-      "model": "Lessons",
+      "model": "Enrollments",
       "foreignKey": ""
     }
   },
@@ -66,35 +66,42 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__upsert__lessons"
+      "property": "__upsert__enrollments"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__create__lessons"
+      "property": "__create__enrollments"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__get__lessons"
+      "property": "__delete__enrollments"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__findById__lessons"
+      "property": "__get__enrollments"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__updateById__lessons"
+      "property": "__findById__enrollments"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "__updateById__enrollments"
     }
   ],
   "methods": {}

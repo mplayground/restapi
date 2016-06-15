@@ -1,14 +1,28 @@
 <!--#include virtual="design_header.html" -->
 
 <link rel='stylesheet' href='/fullcalendar/fullcalendar.css' />
-<script src='/fullcalendar/lib/jquery.min.js'></script>
 <script src='/fullcalendar/lib/moment.min.js'></script>
 <script src='/fullcalendar/fullcalendar.js'></script>
 
 <script>
   $(document).ready(function() {
 
-    // page is now ready, initialize the calendar...
+    // 강의 불러오기
+    $.ajax({
+        url: "/api/Teachers/"+ $.cookie('userId') +"/enrollments",
+        method: "get",
+        data: {},
+        dataType : 'json',
+        cache: false,
+        success: function(data) {
+          $.each(data, function(i, item) {
+            apiAddEventSource(item.id, item.title, item.startAt, item.endAt);
+          });
+        },
+        error: function(request, status, error) {
+          //alert("request.status : " + request.status);
+        }
+    });
 
     var date = new Date();
     var d = date.getDate();
@@ -21,6 +35,7 @@
         center : 'title',
         right : 'month,agendaWeek,agendaDay'
       },
+      defaultView: "agendaWeek",
       selectable: true,
       selectHelper: true,
       selectOverlap: false,
@@ -30,7 +45,6 @@
       disableDragging: false,
       disableResizing: false,
       dayClick: function(date, jsEvent, view) {
-        console.log(view);
         // 날짜를 클릭하면 해당 날의 스케쥴로 이동
         if(view.name == "month") {
           $('#calendar').fullCalendar('gotoDate', date);
@@ -71,11 +85,31 @@
     var start_date = $("#event_start_date").val() + "T" + $("#event_start_time").val();
     var end_date = $("#event_end_date").val() + "T" + $("#event_end_time").val();
 
-    $('#calendar').fullCalendar('addEventSource', {
-      events: [{id: event_id, title: event_title, start: start_date, end: end_date}]
+    apiAddEventSource(event_id, event_title, start_date, end_date);
+
+    // 강의 등록
+    $.ajax({
+        url: "/api/Teachers/"+ $.cookie('userId') +"/enrollments",
+        method: "post",
+        data: {title:event_title, startAt:start_date, endAt:end_date, status:"open", coins:"0", studentsId:""},
+        dataType : 'json',
+        cache: false,
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(request, status, error) {
+          alert("request.status : " + request.status);
+        }
     });
 
     closeModal();
+  }
+
+  // 이벤트를 달력에 표시
+  function apiAddEventSource(event_id, event_title, start_date, end_date) {
+    $('#calendar').fullCalendar('addEventSource', {
+      events: [{id: event_id, title: event_title, start: start_date, end: end_date}]
+    });
   }
 
   // 이벤트 삭제

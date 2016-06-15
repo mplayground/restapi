@@ -21,18 +21,6 @@
     }
   },
   "validations": [],
-  "relations": {
-    "teachers": {
-      "type": "belongsTo",
-      "model": "Teachers",
-      "foreignKey": ""
-    },
-    "enrollments": {
-      "type": "hasMany",
-      "model": "Enrollments",
-      "foreignKey": ""
-    }
-  },
   "acls": [
     {
       "accessType": "*",
