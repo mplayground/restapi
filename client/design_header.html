@@ -20,7 +20,7 @@
   <![endif]-->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
-  <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
   <script>
     $(document).ready(function() {
@@ -46,7 +46,7 @@
 
     function logout() {
       $.ajax({
-          url: "/api/Students/logout?access_token="+$.cookie('access_token'),
+          url: "/api/Students/logout",
           method: "post",
           data: {},
           dataType : 'json',
